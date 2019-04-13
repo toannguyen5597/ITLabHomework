@@ -19,6 +19,7 @@ public class ConnectionPool {
     public static Connection getConnection(){
         Connection con = pool.getConnection();
         if(con!= null) System.out.println("get connection successfull");
+        else System.out.println("missconnection");
         return con;
     }
     
@@ -28,8 +29,9 @@ public class ConnectionPool {
     }
     
     public static void main(String[] args){
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < 10; i++){
             MyThread queryThread = new MyThread(getConnection(), "SELECT *FROM STUDENT;");
+            queryThread.start();
         }
     }
 }
