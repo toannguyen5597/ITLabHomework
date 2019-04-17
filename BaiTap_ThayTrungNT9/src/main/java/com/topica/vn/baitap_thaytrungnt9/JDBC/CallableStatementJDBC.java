@@ -44,7 +44,7 @@ public class CallableStatementJDBC {
     }
     
     static CallableStatement cst=null;
-    static ResultSet result = null;
+    private static ResultSet result = null;
     public static void main(String[] args) throws SQLException, ClassNotFoundException{
         CallableStatementJDBC jdbc = new CallableStatementJDBC();
         Connection con = myConnection("testdb", "root", "12345");
@@ -53,7 +53,7 @@ public class CallableStatementJDBC {
             Statement st = con.createStatement();
             
             //Tạo một table trong db
-            st.execute("Create table Student(ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(50) NOT NULL, ADDRESS VARCHAR(50), AGE INT, PRIMARY KEY (ID));");
+            //st.execute("Create table Student(ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(50) NOT NULL, ADDRESS VARCHAR(50), AGE INT, PRIMARY KEY (ID));");
             
             //Thêm dữ liệu vào table
             for(int i = 0;i < 10; i++){
@@ -61,16 +61,16 @@ public class CallableStatementJDBC {
             }
             
             //Tạo produre lấy ra toàn bộ student 
-            st.execute("CREATE PROCEDURE GETALLSTUDENT ()\n" +
-                            "BEGIN\n" +
-                            "SELECT *FROM STUDENT;" +
-                            "END");
+//            st.execute("CREATE PROCEDURE GETALLSTUDENT ()\n" +
+//                            "BEGIN\n" +
+//                            "SELECT *FROM STUDENT;" +
+//                            "END");
             
             //Tạo produre lấy ra sinh viên theo id 
-            st.execute("CREATE PROCEDURE GETSTUDENTBYID (IDSTUDENT INT)\n" +
-                            "BEGIN\n" +
-                            "SELECT *FROM STUDENT WHERE ID = IDSTUDENT;" +
-                            "END");
+//            st.execute("CREATE PROCEDURE GETSTUDENTBYID (IDSTUDENT INT)\n" +
+//                            "BEGIN\n" +
+//                            "SELECT *FROM STUDENT WHERE ID = IDSTUDENT;" +
+//                            "END");
             
             //Thực hiện các produre bằng CallableStatenment
             cst = con.prepareCall("{CALL GETALLSTUDENT()}");
